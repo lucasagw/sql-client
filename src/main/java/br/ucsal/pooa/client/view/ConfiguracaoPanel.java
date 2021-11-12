@@ -1,5 +1,6 @@
 package br.ucsal.pooa.client.view;
 
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,7 +8,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 import br.ucsal.pooa.client.backend.Configuracao;
 import br.ucsal.pooa.client.test.SQLClient;
@@ -16,16 +19,18 @@ public class ConfiguracaoPanel extends JFrame {
 
 	private Configuracao configuracao = new Configuracao();
 
-	private JLabel url = new JLabel("URL:");
-	private JLabel usuario = new JLabel("Usuario:");
-	private JLabel senha = new JLabel("Senha:");
-	private JLabel driver = new JLabel("Driver:");
+	private JLabel url = new JLabel("URL:", SwingConstants.CENTER);
+	private JLabel usuario = new JLabel("Usuario:", SwingConstants.CENTER);
+	private JLabel senha = new JLabel("Senha:", SwingConstants.CENTER);
+	private JLabel driver = new JLabel("Driver:", SwingConstants.CENTER);
 
-	private JTextField urlText = new JTextField();
-	private JTextField usuarioText = new JTextField();
-	private JTextField senhaText = new JTextField();
-	private JTextField driverText = new JTextField();
-
+	private JTextField urlText = new JTextField(20);
+	private JTextField usuarioText = new JTextField(20);
+	private JTextField senhaText = new JTextField(20);
+	private JTextField driverText = new JTextField(20);
+	
+    private JPanel grid = new JPanel(new GridLayout(5, 2));
+	
 	private JButton confirmar = new JButton("Confirmar");
 	private JButton cancelar = new JButton("Cancelar");
 	
@@ -38,24 +43,37 @@ public class ConfiguracaoPanel extends JFrame {
 	}
 
 	public ConfiguracaoPanel() {
-		super();
-		setLayout(new GridLayout(5, 2));
+		super("Configurações");
+		setLayout(new FlowLayout());
+		
+		setResizable(false);
+		
 		this.setSize(400, 400);
 
-		this.add(url);
-		this.add(urlText);
+		grid.add(url);
+//		url.setBackground(Color.red);
+//		url.setOpaque(true);
+		grid.add(urlText);
+		urlText.setText("jdbc:hsqldb:mem:mymemdb"); //default
+	
+		grid.add(usuario);
+		grid.add(usuarioText);
+		usuarioText.setText("SA"); //default
 
-		this.add(usuario);
-		this.add(usuarioText);
+		grid.add(senha);
+		grid.add(senhaText);
+		senhaText.setText(""); //default
 
-		this.add(senha);
-		this.add(senhaText);
+		grid.add(driver);
+		grid.add(driverText);
+		driverText.setText("org.hsqldb.jdbc.JDBCDriver"); //default
 
-		this.add(driver);
-		this.add(driverText);
-
-		this.add(cancelar);
-		this.add(confirmar);
+		grid.add(cancelar);
+		grid.add(confirmar);
+		
+		this.add(grid);
+		
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		cancelar.addActionListener(new ActionListener() {
 
@@ -82,6 +100,9 @@ public class ConfiguracaoPanel extends JFrame {
 
 			}
 		});
+		
+		this.pack();
+		
 	}
 
 }
