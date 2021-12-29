@@ -3,7 +3,7 @@ package br.ucsal.pooa.client.backend;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class Update implements Command {
+public class Update extends Command {
 
 	@Override
 	public String executar(Statement stmt, String sql) throws SQLException {

@@ -5,7 +5,14 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class Consulta implements Command {
+public class Consulta extends Command {
+
+//	private String sql;
+	
+//	public Consulta(String sql) {
+//		super();
+//		this.sql = sql;
+//	}
 
 	@Override
 	public String executar(Statement stmt, String sql) throws SQLException {

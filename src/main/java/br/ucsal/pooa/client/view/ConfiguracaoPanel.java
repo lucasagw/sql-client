@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import br.ucsal.pooa.client.backend.Configuracao;
+import br.ucsal.pooa.client.builder.ConfiguracaoBuilder;
 import br.ucsal.pooa.client.test.SQLClient;
 
 public class ConfiguracaoPanel extends JFrame {
@@ -54,19 +55,22 @@ public class ConfiguracaoPanel extends JFrame {
 //		url.setBackground(Color.red);
 //		url.setOpaque(true);
 		grid.add(urlText);
-		urlText.setText("jdbc:hsqldb:mem:mymemdb"); //default
-	
+		
+		Configuracao defaultHsqldb = ConfiguracaoBuilder.umBanco().build();
+		
+		urlText.setText(defaultHsqldb.getUrl()); //default
+		
 		grid.add(usuario);
 		grid.add(usuarioText);
-		usuarioText.setText("SA"); //default
+		usuarioText.setText(defaultHsqldb.getUsuario()); //default
 
 		grid.add(senha);
 		grid.add(senhaText);
-		senhaText.setText(""); //default
+		senhaText.setText(defaultHsqldb.getSenha()); //default
 
 		grid.add(driver);
 		grid.add(driverText);
-		driverText.setText("org.hsqldb.jdbc.JDBCDriver"); //default
+		driverText.setText(defaultHsqldb.getDriver()); //default
 
 		grid.add(cancelar);
 		grid.add(confirmar);
